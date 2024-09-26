@@ -1,7 +1,6 @@
 langchain_community
 langchain_experimental
 langchain_huggingface
-langchain_community.vectorstores
 langchain_google_genai
 python-dotenv
 langchain
