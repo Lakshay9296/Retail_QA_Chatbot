@@ -1,0 +1,7 @@
+langchain_community
+langchain_experimental
+few-shots
+langchain_huggingface
+langchain_community.vectorstores
+langchain_google_genai
+python-dotenv
