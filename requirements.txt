@@ -5,3 +5,4 @@ langchain_huggingface
 langchain_community.vectorstores
 langchain_google_genai
 python-dotenv
+langchain
