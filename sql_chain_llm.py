@@ -17,10 +17,10 @@ def few_shots_chain():
 
     llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", api_key=api_key, temperature=0, max_retries=3)
     
-    db_user = "root"
-    db_password = "root"
-    db_host = "localhost"
-    db_name = "tshirts"
+    db_user = os.getenv("DB_USER")
+    db_password = os.getenv("DB_PASSWORD")
+    db_host = os.getenv("DB_HOST")
+    db_name = os.getenv("DB_NAME")
 
     db = SQLDatabase.from_uri(f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}", sample_rows_in_table_info=3)
 
@@ -53,6 +53,7 @@ def few_shots_chain():
 
 if __name__ == "__main__":
     chain = few_shots_chain()
+    chain.run("Blue tshirts left?")
 
     
     
