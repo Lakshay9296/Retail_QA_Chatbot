@@ -1,5 +1,4 @@
 import os
-from langchain_groq import ChatGroq
 from langchain_community.utilities import SQLDatabase
 from langchain_experimental.sql import SQLDatabaseChain
 from few_shots import few_shots, mysql_prompt
@@ -9,15 +8,14 @@ from langchain.prompts import SemanticSimilarityExampleSelector
 from langchain.chains.sql_database.prompt import PROMPT_SUFFIX
 from langchain.prompts.prompt import PromptTemplate
 from langchain.prompts import FewShotPromptTemplate
-
+from langchain_google_genai import ChatGoogleGenerativeAI
+from dotenv import load_dotenv
 
 def few_shots_chain():
-    api_key = os.getenv("groq_api_key")
-    llm = ChatGroq(
-    model="llama3-groq-70b-8192-tool-use-preview",
-    temperature=0.1,
-    groq_api_key=api_key
-    )
+    load_dotenv()
+    api_key = os.getenv("API_KEY")
+
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", api_key=api_key, temperature=0, max_retries=3)
     
     db_user = "root"
     db_password = "root"
@@ -51,7 +49,6 @@ def few_shots_chain():
     )
             
     chain = SQLDatabaseChain.from_llm(llm,db,verbose= True, prompt=few_shot_prompt)
-    
     return chain
 
 if __name__ == "__main__":
